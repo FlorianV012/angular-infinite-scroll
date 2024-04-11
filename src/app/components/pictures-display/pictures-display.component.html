@@ -1,5 +1,22 @@
-<ul class="grid">
-  <li *ngFor="let photo of photos">
-    <img [src]="photo.urls.regular" [alt]="photo.alt_description" />
-  </li>
-</ul>
+<div class="container">
+  <ul class="grid">
+    <li *ngFor="let photo of photos">
+      <img [src]="photo.urls.regular" [alt]="photo.alt_description" />
+    </li>
+  </ul>
+
+  <!-- Error -->
+
+  <!-- No error but no result -->
+  <p *ngIf="photos.length === 0 && !loading && !error">
+    No image available for this query
+  </p>
+
+  <!-- Loading -->
+  <img *ngIf="loading && !error" class="spinner" src="assets/spinner.svg" />
+
+  <!-- Last page reached-->
+  <p *ngIf="maxPages === pageNumber && photos.length !== 0">
+    No more images to display for that query.
+  </p>
+</div>

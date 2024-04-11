@@ -26,6 +26,9 @@ export class PicturesDisplayComponent {
   pageNumber: number = 1;
   maxPages: number = 0;
 
+  loading: boolean = true;
+  error: boolean = false;
+
   ngOnInit() {
     this.getPhotos();
   }
@@ -63,6 +66,7 @@ export class PicturesDisplayComponent {
         this.maxPages = data.total_pages;
         // console.log(data.results);
         this.onPhotosLoaded();
+        this.loading = false;
       });
   }
 

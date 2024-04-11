@@ -1,11 +1,18 @@
+.container {
+  width: calc(100vw - 6rem);
+  margin: 1rem auto;
+
+  p {
+    margin-top: 2rem;
+  }
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: 175px;
   gap: 1rem;
   justify-content: center;
-  width: calc(100vw - 6rem);
-  margin: 1rem auto;
 }
 
 img {
@@ -13,4 +20,8 @@ img {
   width: 100%;
   object-fit: cover;
   //   cursor: pointer;
+}
+
+.spinner {
+  width: 200px;
 }
