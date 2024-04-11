@@ -4,6 +4,8 @@
   grid-auto-rows: 175px;
   gap: 1rem;
   justify-content: center;
+  width: calc(100vw - 6rem);
+  margin: 1rem auto;
 }
 
 img {
