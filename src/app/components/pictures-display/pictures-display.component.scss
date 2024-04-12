@@ -1,6 +1,10 @@
 .container {
   width: calc(100vw - 6rem);
-  margin: 1rem auto;
+  margin: 4rem auto 1rem;
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
 
   p {
     margin-top: 2rem;

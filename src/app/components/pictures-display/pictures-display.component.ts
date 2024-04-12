@@ -7,11 +7,13 @@ import {
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { IPhoto } from '../../interfaces/photo';
+import { FormsModule } from '@angular/forms';
+import { SearchFormComponent } from '../search-form/search-form.component';
 
 @Component({
   selector: 'app-pictures-display',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, SearchFormComponent],
   templateUrl: './pictures-display.component.html',
   styleUrl: './pictures-display.component.scss',
 })
@@ -27,8 +29,8 @@ export class PicturesDisplayComponent {
   pageNumber: number = 1;
   maxPages: number = 0;
   loading: boolean = true;
-  error: boolean = false;
   errorMessage: string | null = null;
+  searchRef: string = '';
 
   ngOnInit() {
     this.getPhotos();
@@ -77,6 +79,15 @@ export class PicturesDisplayComponent {
   loadMore() {
     if (this.pageNumber < this.maxPages) {
       this.pageNumber++;
+      this.getPhotos();
+    }
+  }
+
+  onSubmit(searchRef: string) {
+    if (this.query !== searchRef) {
+      this.query = searchRef;
+      this.pageNumber = 1;
+      this.photos = [];
       this.getPhotos();
     }
   }

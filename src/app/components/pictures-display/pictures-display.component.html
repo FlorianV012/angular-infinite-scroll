@@ -1,4 +1,11 @@
 <div class="container">
+  <h1>Unsplash Clone.</h1>
+
+  <app-search-form
+    [searchRef]="searchRef"
+    (search)="onSubmit($event)"
+  ></app-search-form>
+
   <ul class="grid">
     <li *ngFor="let photo of photos">
       <img [src]="photo.url" [alt]="photo.description" />
