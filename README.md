@@ -1,6 +1,7 @@
-# Scroll
+# Infinite Scroll
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
+It uses the Unsplash API(https://api.unsplash.com)
 
 ## Development server
 

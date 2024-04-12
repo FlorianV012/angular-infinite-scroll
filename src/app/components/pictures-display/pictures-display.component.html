@@ -7,7 +7,7 @@
   ></app-search-form>
 
   <ul class="grid">
-    <li *ngFor="let photo of photos">
+    <li *ngFor="let photo of photos" (click)="openModal(photo)">
       <img [src]="photo.url" [alt]="photo.description" />
     </li>
   </ul>
@@ -32,3 +32,9 @@
     No more images to display for that query.
   </p>
 </div>
+
+<app-modal
+  *ngIf="showModal"
+  [picture]="picture"
+  (closeModal)="closeModal()"
+></app-modal>

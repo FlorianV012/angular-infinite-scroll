@@ -9,11 +9,12 @@ import { CommonModule } from '@angular/common';
 import { IPhoto } from '../../interfaces/photo';
 import { FormsModule } from '@angular/forms';
 import { SearchFormComponent } from '../search-form/search-form.component';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-pictures-display',
   standalone: true,
-  imports: [CommonModule, FormsModule, SearchFormComponent],
+  imports: [CommonModule, FormsModule, SearchFormComponent, ModalComponent],
   templateUrl: './pictures-display.component.html',
   styleUrl: './pictures-display.component.scss',
 })
@@ -26,11 +27,13 @@ export class PicturesDisplayComponent {
 
   photos: IPhoto[] = [];
   query: string = 'random';
+  searchRef: string = '';
   pageNumber: number = 1;
   maxPages: number = 0;
   loading: boolean = true;
   errorMessage: string | null = null;
-  searchRef: string = '';
+  showModal: boolean = false;
+  picture!: IPhoto;
 
   ngOnInit() {
     this.getPhotos();
@@ -90,5 +93,14 @@ export class PicturesDisplayComponent {
       this.photos = [];
       this.getPhotos();
     }
+  }
+
+  openModal(photo: any) {
+    this.showModal = true;
+    this.picture = photo;
+  }
+
+  closeModal() {
+    this.showModal = false;
   }
 }
