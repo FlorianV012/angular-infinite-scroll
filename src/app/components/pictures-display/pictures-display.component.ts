@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
+import { IResponse } from '../../interfaces/api-response';
 
 @Component({
   selector: 'app-pictures-display',
@@ -25,9 +26,9 @@ export class PicturesDisplayComponent {
   query: string = 'random';
   pageNumber: number = 1;
   maxPages: number = 0;
-
   loading: boolean = true;
   error: boolean = false;
+  errorMessage: string | null = null;
 
   ngOnInit() {
     this.getPhotos();
@@ -59,19 +60,24 @@ export class PicturesDisplayComponent {
   }
 
   getPhotos() {
-    this.apiService
-      .getPhotos(this.query, this.pageNumber)
-      .subscribe((data: any) => {
+    this.apiService.getPhotos(this.query, this.pageNumber).subscribe(
+      (data: IResponse) => {
         this.photos = [...this.photos, ...data.results];
         this.maxPages = data.total_pages;
         // console.log(data.results);
+        // console.log(data);
         this.onPhotosLoaded();
         this.loading = false;
-      });
+      },
+      (error) => {
+        this.errorMessage = error;
+        this.loading = false;
+      }
+    );
   }
 
   loadMore() {
-    console.log(`${this.pageNumber}/${this.maxPages}`);
+    // console.log(`${this.pageNumber}/${this.maxPages}`);
 
     if (this.pageNumber < this.maxPages) {
       this.pageNumber++;
