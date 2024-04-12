@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
-import { IResponse } from '../../interfaces/api-response';
+import { IPhoto } from '../../interfaces/photo';
 
 @Component({
   selector: 'app-pictures-display',
@@ -22,7 +22,7 @@ export class PicturesDisplayComponent {
     private cdr: ChangeDetectorRef
   ) {}
 
-  photos: any[] = [];
+  photos: IPhoto[] = [];
   query: string = 'random';
   pageNumber: number = 1;
   maxPages: number = 0;
@@ -61,11 +61,9 @@ export class PicturesDisplayComponent {
 
   getPhotos() {
     this.apiService.getPhotos(this.query, this.pageNumber).subscribe(
-      (data: IResponse) => {
+      (data: { total_pages: number; results: IPhoto[] }) => {
         this.photos = [...this.photos, ...data.results];
         this.maxPages = data.total_pages;
-        // console.log(data.results);
-        // console.log(data);
         this.onPhotosLoaded();
         this.loading = false;
       },
@@ -77,8 +75,6 @@ export class PicturesDisplayComponent {
   }
 
   loadMore() {
-    // console.log(`${this.pageNumber}/${this.maxPages}`);
-
     if (this.pageNumber < this.maxPages) {
       this.pageNumber++;
       this.getPhotos();

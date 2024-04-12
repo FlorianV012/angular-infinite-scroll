@@ -1,7 +1,7 @@
 <div class="container">
   <ul class="grid">
     <li *ngFor="let photo of photos">
-      <img [src]="photo.urls.regular" [alt]="photo.alt_description" />
+      <img [src]="photo.url" [alt]="photo.description" />
     </li>
   </ul>
 
